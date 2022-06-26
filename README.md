@@ -1,4 +1,4 @@
-# Deep Wilcoxon signed-rank test for Covid-19 classfication
+<!-- # Deep Wilcoxon signed-rank test for Covid-19 classfication
 
 ## Overview 
 
@@ -71,3 +71,4 @@ Optional parameters (and default values):
 
 * [SwinTransformer](https://github.com/microsoft/Swin-Transformer)
 
+ -->

@@ -19,7 +19,7 @@ args = get_args()
 train_loaders, val_loaders = get_loader(args)
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID" 
-os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 
 
 
@@ -92,7 +92,7 @@ for _ in range(args.epoch):
     
     val_f1 = 0
     if _>=0 and _ % 1 == 0:
-        val_f1 = eval_final(model)  
+        val_f1 = eval1(model)  
         if val_f1 > 0.86 and val_f1 <0.87 :
             torch.save(model.module.state_dict(), '0.86.pt')  
         if val_f1 > 0.87 and val_f1 <0.88 :

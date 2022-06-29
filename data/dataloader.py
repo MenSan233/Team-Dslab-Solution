@@ -42,8 +42,6 @@ def get_loader(args):
     
     val_data_pos = Covid19('val/pos', args.path, args.val_batch, transform = transform)
     val_data_neg = Covid19('val/neg', args.path, args.val_batch, transform = transform)
-
-    test_data = Covid19('test/test', args.path, args.val_batch, transform = transform)
     
     train_loader_pos = DataLoader(dataset = train_data_pos, batch_size = args.train_ct_batch, shuffle=True, num_workers=2)
     train_loader_neg = DataLoader(dataset = train_data_neg, batch_size = args.train_ct_batch, shuffle=True, num_workers=2)
@@ -53,14 +51,9 @@ def get_loader(args):
     
     val_loader_pos = DataLoader(dataset = val_data_pos, batch_size = 1, shuffle=False, num_workers=2)
     val_loader_neg = DataLoader(dataset = val_data_neg, batch_size = 1, shuffle=False, num_workers=2)
-
-
-    test_loader = DataLoader(dataset = test_data, batch_size = 1, shuffle=False, num_workers=2)
     
     val_loaders = {'pos': val_loader_pos,
                    'neg': val_loader_neg}
-
-    test_loaders = {'test': test_loader}
     sum = 0             
    # for x in train_loader_pos:
   #      sum = sum+1
@@ -74,7 +67,4 @@ def get_loader(args):
     
 
     
-    return train_loaders, val_loaders,test_loaders
-
-
-
+    return train_loaders, val_loaders

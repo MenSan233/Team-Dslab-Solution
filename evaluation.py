@@ -3,7 +3,6 @@ from scipy.stats import wilcoxon
 import torch
 import numpy as np
 from data import get_loader
-from data import get_testloader
 from args import get_args
 args = get_args()
 
@@ -16,7 +15,7 @@ def eval1(model):
     neg_acc = 0
     true_label = []
     pred_label = []
-    train_loaders, val_loaders,test_loaders = get_loader(args) 
+    train_loaders, val_loaders = get_loader(args) 
     model.eval()
     
     for pos_img in val_loaders['pos']:
@@ -74,7 +73,7 @@ def eval_final(model):
         sum = 0
         all_pos_output = []
         all_neg_output = []
-        train_loaders, val_loaders,test_loaders = get_loader(args)   
+        train_loaders, val_loaders = get_loader(args)   
         for pos_img in val_loaders['pos']:            
             ct_b, img_b, c, h, w = pos_img.size()           
             pos_img = pos_img.reshape(-1, c, h, w).cuda()           
@@ -132,45 +131,4 @@ def eval_final(model):
     return val_f1 
 
 
-def test(model):
-    pos = []
-    neg = []
-    test = []  
-    val_acc = 0
-    pos_acc = 0
-    neg_acc = 0
-    true_label = []
-    pred_label = []  
-    model.eval()
-    for _ in range(args.val_epoch):
-        sum = 0
-        all_output = []
-        all_neg_output = []
-        train_loaders, val_loaders,test_loaders = get_loader(args)  
-        for test_img in test_loaders['test']:            
-            ct_b, img_b, c, h, w = test_img.size()           
-            test_img = test_img.reshape(-1, c, h, w).cuda()           
-            test_output = model(test_img) 
-            test_numpy = test_output.cpu().flatten().detach().numpy()
-            test_numpy = np.mean(test_numpy)
-            all_output.append(test_numpy)
-
-
-        test.append(all_output)
-
-    for i,menber in enumerate (test[0]):
-        ind = 0
-        for j in test:
-            if j[i]>=0:
-                ind +=1
-            else:
-                ind -=1
-        if ind >=0:
-            pos_acc += 1
-            pred_label.append(1)
-        else:
-            pred_label.append(0)
-        true_label.append(1)
-
-
-    print()
+    

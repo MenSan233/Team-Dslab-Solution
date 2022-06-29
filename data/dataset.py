@@ -46,7 +46,6 @@ class Covid19(Dataset):
     def __getitem__(self, index):
         img_list = []
         img_path_l = os.listdir(self.data_list[index])
-        print(self.data_list[index])
         for i in img_path_l:
             i.strip()
             i.strip("\n")

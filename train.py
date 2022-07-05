@@ -102,9 +102,5 @@ for _ in range(args.epoch):
         if val_f1 > 0.89:
             torch.save(model.module.state_dict(), '0.89.pt') 
             break     
-print('one time eval')
-for _ in range(args.val_epoch):
-        val_f1 = eval1(model)            
-print('several times eval')
-val_f1 = eval_final(model)   
+
 

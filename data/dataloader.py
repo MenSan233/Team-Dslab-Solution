@@ -1,7 +1,6 @@
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import albumentations as A
-
 from .dataset import Covid19
 
 def get_loader(args):
